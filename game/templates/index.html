@@ -1,0 +1,112 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Barge Trader</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" 
+        crossorigin="anonymous">
+    </head>
+    <body>
+        <header>
+            <!-- Section: Navbar -->
+            <nav class="navbar bg-body-tertiary">
+                <div class="container-fluid">
+                  <a class="navbar-brand" href="#">
+                    <img src="{% static 'bargetraderlogo.png' %}" alt="Logo" width="100" height="100" class="d-inline-block align-middle">
+                    Contango Trader Version 1.0
+                  </a>
+                </div>
+              </nav>
+        </header>
+
+        <!-- Section: Main Body -->
+        <main class="my-5">
+
+            <!-- Secton: Hero & CTA -->
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="jumbotron">
+                            <h3 class="display-4">An Oil Trading Sim Built By Oil Traders</h3>
+                            <br>
+                            <p class="lead">Learn how to make two way prices. React to news information. Trade against an AI. Develop your understanding of oil trading.</p>
+                            <!-- Add a button here that links to the modal  -->
+                            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#tradingModal" style="padding: 5px 10px; font-size: 15px;">Start Trading</button>
+                          </div>
+                    </div>
+                    <div class="col-md-7">
+                        <img src="{% static 'facets-of-data-analytics.jpeg' %}" alt="" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+
+            <!-- Section: How It Works -->
+             <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="jumbotron">
+                            <h3 class="display-4">How It Works</h3>
+                            <br>
+                            <ul>
+                                <li>Objective: Trade oil effectively within a 3-minute round to make a profit by predicting the final price based on real-time news.</li>
+                                <li>Starting Point: Each round begins with an initial oil price.</li>
+                                <li>News Interpretation: Analyze news stories released during the round to forecast the closing price of oil.</li>
+                                <li>Trading Mechanics: Make bids (buy price) and offers (sell price) to trade against an AI opponent.</li>
+                                <li>Bid and Offer: Your bid is the maximum you're willing to pay; your offer is the minimum you're willing to sell for.</li>
+                                <li>AI Competition: Trade effectively against the AI, which also makes its own bids and offers.</li>
+                                <li>Lifting the Offer: You can choose to 'lift the offer'—accepting the AI's sell price—if it benefits your strategy.</li>
+                                <li>Round Conclusion: Profit is determined by the difference between your trade price and the final revealed price at the end of the round.</li>
+                            </ul>
+                            <p class="lead">Sharpen your trading skills. Can you outtrade the AI?</p>
+                            <!-- Add a modal here to validate the user and start the game -->
+                            <button type="button" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#tradingModal" style="padding: 5px 10px; font-size: 15px;">Start Trading</button>
+                    
+                          </div>
+                    </div> 
+                </div>
+            </div> 
+            <br>
+            <br>
+            <!-- Section: Footer -->
+            <footer class="bg-dark text-center text-lg-start">
+                <!-- Copyright -->
+                <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+                <a class="text-light" href="">© 2023 contango-analytics.com</a>
+                </div>
+                <!-- Copyright -->
+            </footer>
+        </main>
+        <!-- Adding a div for the modal for starting the trading game     -->
+        <div class="modal fade" id="tradingModal" tabindex="-1" aria-labelledby="tradingModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title fs-5" id="tradingModalLabel">Start Trading</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Adding the references to the register function in the form -->
+                  <form id="tradingForm" action="{% url 'register' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group mb-3">
+                      <label for="tradeInput" class="mb-2">Enter Your Trader Name To Get Started</label>
+                      <input type="text" class="form-control" id="tradeInput" name="name" placeholder="Enter your trader name">
+                    </div>
+                    <div id="messageContainer" class="alert alert-danger" style="display: none;"></div>
+                    <button type="submit" class="btn btn-primary mt-2">Submit</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+        </div>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
+    <script src="{% static 'index.js' %}"></script>
+    </body>
+</html>
